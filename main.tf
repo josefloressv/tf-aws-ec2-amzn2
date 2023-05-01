@@ -58,7 +58,7 @@ resource "aws_security_group" "ec2" {
 # Create a SSH keypair
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
+  key_name   = var.key_pair_name
   public_key = tls_private_key.ec2.public_key_openssh
 }
 
@@ -72,5 +72,5 @@ resource "tls_private_key" "ec2" {
 # https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file
 resource "local_file" "tf-key" {
   content  = tls_private_key.ec2.private_key_pem
-  filename = "tf-key-pair"
+  filename = "tf-${var.key_pair_name}.pem"
 }

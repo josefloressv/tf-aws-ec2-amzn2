@@ -8,6 +8,11 @@ variable "common_tags" {
   description = "The list of common tags"
 }
 
+variable "key_pair_name" {
+  type        = string
+  description = "The name of the new key pair"
+}
+
 variable "sg_name" {
   type        = string
   description = "The name of the Security Group"
